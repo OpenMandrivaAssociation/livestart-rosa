@@ -1,7 +1,7 @@
 Summary:	Livestart rosa script
 Name:		livestart-rosa
 Version:	1.0.0
-Release:	2
+Release:	3
 BuildArch:	noarch
 License:	GPL
 Group:		System/Configuration/Other
@@ -13,7 +13,10 @@ Small script checking if system was started from a
 flash drive and creating a config for draklive-install.
 
 %post
-%_add_service_helper checkflashboot
+%_post_service checkflashboot
+
+%preun
+%_preun_service checkflashboot
 
 %files
 %defattr(-,root,root)
