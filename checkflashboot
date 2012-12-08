@@ -1,0 +1,30 @@
+#!/bin/sh
+# chkconfig: 2345 99 99
+# descirption: Live CD flash check
+
+
+### BEGIN INIT INFO
+# Provides: checkflashboot
+# Should-Start:
+# Default-Start: 2 3 4 5
+# Short-Description: Live CD check for flash boot
+# Description: Live CD check for flash boot
+### END INIT INFO
+
+. /etc/init.d/functions
+
+echo "Checking if system is started from flash"
+
+if grep -i "data=UUID" /proc/cmdline > /dev/null; then
+	echo "SOURCE=/tmp/sysroot-ro" >> /etc/sysconfig/draklive-install
+fi
+if grep -i "liveimg" /proc/cmdline > /dev/null; then
+	pushd /lib/modules/
+	KERNEL=$(echo *)
+	popd
+	echo
+	mkdir -p /run/initramfs/live/isolinux/
+	ln -s /boot/initramfs-$KERNEL.img /run/initramfs/live/isolinux/initrd0.img
+fi
+
+exit 0
