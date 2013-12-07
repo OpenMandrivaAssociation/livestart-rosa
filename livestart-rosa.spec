@@ -1,7 +1,7 @@
 Summary:	Livestart rosa script
 Name:		livestart-rosa
 Version:	1.0.0
-Release:	12
+Release:	13
 BuildArch:	noarch
 License:	GPL
 Group:		System/Configuration/Other
